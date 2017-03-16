@@ -2,6 +2,7 @@ require_relative 'bike'
 
 class DockingStation
 attr_reader :bike
+  DEFAULT_CAPACITY = 20
 
 # Use an initialize function to set the initial value of this attribute to an empty array.
   def initialize
@@ -27,7 +28,7 @@ attr_reader :bike
 private
 
     def full?
-      @bikes.count >= 20
+      @bikes.count >= DEFAULT_CAPACITY
     end
 
     def empty?
