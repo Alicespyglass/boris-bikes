@@ -1,14 +1,20 @@
 require_relative 'bike'
 
 class DockingStation
-attr_reader :bike
+  attr_accessor :capacity
+
   DEFAULT_CAPACITY = 20
 
 # Use an initialize function to set the initial value of this attribute to an empty array.
-  def initialize
+
+  def initialize(capacity=DEFAULT_CAPACITY)
+    @capacity = capacity
     @bikes = []
   end
 
+  def capacity
+    @capacity
+  end
 
   def release_bike
     fail 'No bikes available' if empty?
@@ -25,10 +31,11 @@ attr_reader :bike
   #  Define a full? predicate method that uses some of the dock code
   # to return true or false depending on whether the station is full or not
 
-private
+  private
 
+  attr_reader :bike
     def full?
-      @bikes.count >= DEFAULT_CAPACITY
+      @bikes.count >= capacity
     end
 
     def empty?
