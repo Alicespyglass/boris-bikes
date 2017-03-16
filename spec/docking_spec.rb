@@ -3,22 +3,23 @@ require 'docking_station.rb'
 describe DockingStation do
   it { is_expected.to respond_to :release_bike}
 
+# subject creates an instance of that CLASS being tested
   describe '#release_bike' do
     it 'releases a bike' do
-      bike = Bike.new
+      bike = Bikes.new
       subject.dock(bike)
       expect(subject.release_bike).to eq bike
     end
 
     describe '#release_bike' do
-    it 'raises an error when bike method called on docking station equals nil' do
+      it 'raises an error when bike method called on docking station equals empty array' do
       expect {subject.release_bike}.to raise_error "No bikes available"
     end
 
     describe '#dock' do
       it 'raises an error when a bike is attempted to dock in a docking station with 1 bike in.' do
-        subject.dock(Bike.new)
-        expect {subject.dock(Bike.new)}.to raise_error "Docking Station Full!"
+        20.times { subject.dock Bikes.new }
+        expect {subject.dock(Bikes.new)}.to raise_error "Docking Station Full!"
       end
     end
   end
@@ -32,8 +33,8 @@ describe DockingStation do
   # more closely resembles feature of above [dock(bike)]
   # return the bike we dock
   it 'docks something' do
-    bike = Bike.new
-    expect(subject.dock(bike)).to eq bike
+    bike = Bikes.new
+    expect(subject.dock(bike)).to eq [bike]
   end
 
   # docking1.bike
@@ -44,9 +45,8 @@ describe DockingStation do
   # more closely resembles feature of above
   # def bike
   it 'returns docked bikes' do
-    bike = Bike.new
-    subject.dock(bike)
-    expect(subject.bike).to eq bike
+    bike = Bikes.new
+    expect(subject.dock(bike)).to eq [bike]
   end
 
 end
